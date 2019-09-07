@@ -1,4 +1,4 @@
-﻿Public Class Form1
+Public Class Form1
 
     '---------
     'Variables
@@ -185,20 +185,20 @@
     '-------
     'escribirNumero([num]) escribe los números presionados, sea mediante clic o teclado, en la caja de texto
     Sub escribirNumero([num])
-        If primerNumero = 0 Then
-            If Not escribiendo Then
+        If Not escribiendo Then
+            If primerNumero = 0 Then
                 txtNums.Text = num
-                If txtNums.Text <> 0 Then
-                    escribiendo = True
-                End If
+                primerNumero = CDbl(txtNums.Text)
             Else
                 txtNums.Text += num
             End If
         Else
             If Not escribiendo2 Then
                 txtNums.Text = num
-                escribiendo2 = True
                 segundoNumero = CDbl(txtNums.Text)
+                If num <> "0" Then
+                    escribiendo2 = True
+                End If
             Else
                 txtNums.Text += num
                 segundoNumero = CDbl(txtNums.Text)
@@ -219,14 +219,14 @@
             End If
         Next
         opPressed = True
-        escribiendo = False
+        escribiendo = True
         escribiendo2 = False
     End Sub
 
     'asignarNumero() establece los valores de las variables primerNumero o segundoNumero según corresponda
     Sub asignarNumero()
         If IsNumeric(txtNums.Text) Then
-            If primerNumero = 0 Then
+            If escribiendo Then
                 primerNumero = CDbl(txtNums.Text)
                 segundoNumero = 0
             Else
